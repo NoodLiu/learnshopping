@@ -1,23 +1,21 @@
 ## 电商项目-需求分析
 ### 核心-购买
- ######git config --global user.name "用户名"
- ######git config --global user.email "用户名"
- ######git config --global gui.encoding utf-8避免中文乱码
- ######git init
- ######git add README.md
- ######git commit -m "first commit"
- ######git remote add origin git@github.com:NoodLiu/learnshoppingt.git
- ######git push -u origin master
- ######git log 查看提交
- ######git reset --hard 版本号 版本回退
- ######git branch
- ######git checkout -b dev 创建分支并切换到dev
- ######git checkout 分支名 切换分支
- ######git pull 
- ######git push 提交
- ######git merge branchname 合并分支
- ######git
- ######git
+######git config --global user.name "用户名"
+######git config --global user.email "用户名"
+######git config --global gui.encoding utf-8避免中文乱码
+######git init
+######git add README.md
+######git commit -m "first commit"
+######git remote add origin git@github.com:NoodLiu/learnshoppingt.git
+######git push -u origin master
+######git log 查看提交
+######git reset --hard 版本号 版本回退
+######git branch
+######git checkout -b dev 创建分支并切换到dev
+######git checkout 分支名 切换分支
+######git pull 
+######git push 提交
+######git merge branchname 合并分支
  #### 一、用户模块
  ###### 登录
  ###### 注册
