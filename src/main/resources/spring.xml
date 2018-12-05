@@ -30,12 +30,12 @@
 
     <context:property-placeholder
             location="classpath:db.properties"></context:property-placeholder>
-    <!-- c3p0带有连接池的数据源 -->
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-        <property name="driverClass" value="${jdbc.driver}"></property>
-        <property name="jdbcUrl" value="${jdbc.url}"></property>
-        <property name="user" value="${jdbc.username}"></property>
-        <property name="password" value="${jdbc.password}"></property>
+    <!-- 数据源 -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
     </bean>
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

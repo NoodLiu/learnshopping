@@ -53,9 +53,9 @@
     </dependency>
     <!--数据库连接池-->
     <dependency>
-      <groupId>com.mchange</groupId>
-      <artifactId>c3p0</artifactId>
-      <version>0.9.5</version>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid</artifactId>
+      <version>1.1.10</version>
     </dependency>
     <!--spring核心依赖-->
     <dependency>
