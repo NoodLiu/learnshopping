@@ -1,4 +1,4 @@
-###配置用户信息
+   ###配置用户信息
    ####git config --global user.name "用户名"
    ####git config --global user.email "邮箱"
    ####编码设置
