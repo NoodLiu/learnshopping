@@ -4,6 +4,8 @@ package com.neuedu.service;
 import com.neuedu.common.ServerResponse;
 import com.neuedu.entity.UserInfo;
 
+import javax.servlet.http.HttpSession;
+
 public interface UserService {
 
 
@@ -11,9 +13,11 @@ public interface UserService {
 
     ServerResponse register(UserInfo userInfo);
 
-    ServerResponse QuestionByUserName(String username);
+    ServerResponse questionByUserName(String username);
 
-    ServerResponse QuestionToAnswer(String username,String question,String answer);
+    ServerResponse questionToAnswer(String username,String question,String answer);
     /* 重置密码 */
-    ServerResponse ResetPassword(String username,String newPassword,String Token);
+    ServerResponse resetPassword(String username,String newPassword,String Token);
+
+    ServerResponse ResetPasswordlogin(UserInfo userInfo, String newpassword, String oldpassword);
 }

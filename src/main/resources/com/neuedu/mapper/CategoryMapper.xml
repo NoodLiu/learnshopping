@@ -63,4 +63,10 @@
     select id, parent_id, name, status, create_time, update_time
     from neuedu_category
   </select>
+
+  <select id="findChildCategory" parameterType="int" resultMap="BaseResultMap">
+ select id, parent_id, name, status, create_time, update_time
+    from neuedu_category
+    where parent_id=#{categoryId}
+  </select>
 </mapper>
