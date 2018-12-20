@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:task="http://www.springframework.org/schema/task"
-       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
 
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -12,21 +12,40 @@
          http://www.springframework.org/schema/task
         http://www.springframework.org/schema/task/spring-task.xsd
         http://www.springframework.org/schema/tx
-        http://www.springframework.org/schema/tx/spring-tx.xsd">
+        http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
      <!--开启注解-->
      <context:component-scan base-package="com.neuedu">
          <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
      </context:component-scan>
 
-    <!--开始定时任务调度注解-->
+    <!--开始定时任务调度 注解 定时去执行-->
     <task:annotation-driven></task:annotation-driven>
 
-    <!--开启基于注解的实物配置-->
-    <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
+    <!--开启基于注解的事务配置-->
+   <!-- <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
+    &lt;!&ndash; 事务管理器 &ndash;&gt;
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"></property>
+    </bean>-->
+    <!-- 事务开始 -->
+    <!--<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" >
+        <property name="dataSource" ref="dataSource"/>
     </bean>
+    &lt;!&ndash;配置事务通知&ndash;&gt;
+    <tx:advice id="transactionInterceptor" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
+    &lt;!&ndash;使用aop将事务管理切到service层   使用advice-ref 去切 pointcut-ref&ndash;&gt;
+    <aop:config>
+        <aop:pointcut id="service" expression="execution(* com.neuedu.service..*.*(..))"/>
+        <aop:advisor advice-ref="transactionInterceptor" pointcut-ref="service"/>
+    </aop:config>-->
+
+    <!-- 配置事务 结束 -->
+
 
     <context:property-placeholder
             location="classpath:db.properties"></context:property-placeholder>
@@ -64,9 +83,5 @@
         <property name="basePackage" value="com.neuedu.dao"/>
         <property name="sqlSessionTemplateBeanName" value="sqlSession"/>
     </bean>
-
-
-
-
 
 </beans>

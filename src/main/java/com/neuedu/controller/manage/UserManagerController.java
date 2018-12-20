@@ -5,13 +5,14 @@ import com.neuedu.common.Const;
 import com.neuedu.common.ServerResponse;
 import com.neuedu.entity.UserInfo;
 import com.neuedu.service.UserMangerService;
-import com.neuedu.service.UserService;
+import com.neuedu.util.GetIpUtils;
+import com.neuedu.util.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @RestController
@@ -22,16 +23,21 @@ public class UserManagerController {
     private UserMangerService userMangerService;
 
     /**
-     * 登录
+     * 管理员登录
      *
      * @return
      */
-    @GetMapping("/login")
-    public ServerResponse login(HttpSession httpSession,String username, String password) {
+    @GetMapping("/login/{username}/{password}")
+    public ServerResponse login(HttpServletRequest request, HttpServletResponse response,HttpSession httpSession, @PathVariable("username") String username, @PathVariable("password") String password) {
         ServerResponse serverResponse = userMangerService.login(username, password);
+        UserInfo userInfo = (UserInfo) serverResponse.getData();
+        System.out.println(userInfo.getRole());
         if (serverResponse.isSuccess()){
-             /*登录成功 */
-            UserInfo userInfo = (UserInfo) serverResponse.getData();
+
+            if(userInfo.getRole()!=Const.RoleEnumn.ROLE_ROOT.getCode()){
+                return ServerResponse.createServerResponseByError("无权限");
+            }
+            /*登录成功 */
             httpSession.setAttribute(Const.CURRENT_USER,userInfo);
         }
         return serverResponse;

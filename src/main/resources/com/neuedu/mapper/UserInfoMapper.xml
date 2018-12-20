@@ -93,8 +93,18 @@
     select count(1)
     from neuedu_user where username=#{username} and question=#{question} and answer=#{answer}
   </select>
+
   <update id="updatePassword" parameterType="com.neuedu.entity.UserInfo">
 
     update neuedu_user set password = #{password} where username = #{username}
   </update>
+  <update id="updateToken" parameterType="com.neuedu.entity.UserInfo">
+
+    update neuedu_user set token = #{token} where id = #{userId}
+  </update>
+  <select id="userInfoByToken" parameterType="String" resultMap="BaseResultMap">
+    select id, username, password, email, phone, question, answer, role, create_time,
+    update_time,token
+    from neuedu_user where token =#{token}
+  </select>
 </mapper>

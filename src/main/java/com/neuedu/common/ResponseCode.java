@@ -5,6 +5,7 @@ package com.neuedu.common;
  * 状态码及信息
  */
 public enum ResponseCode {
+    ERROR(4,"错误"),
     PARAMETERS_REQUIRED(1,"参数必填"),
     USERNAME_EXTIS(2,"用户名已存在"),
     EMAIL_EXTIS(3,"邮箱已存在"),

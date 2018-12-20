@@ -177,7 +177,7 @@
           <version>3.1</version>
       </dependency>
 
-      <!-- alipay -->
+      <!-- alipay 阿里支付 -->
       <dependency>
           <groupId>commons-codec</groupId>
           <artifactId>commons-codec</artifactId>
@@ -236,6 +236,19 @@
           <overwrite>true</overwrite>
         </configuration>
       </plugin>
+      <!-- 打包 -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+                <source>1.8</source>
+                <target>1.8</target>
+                <encoding>utf-8</encoding>
+              <compilerArguments>
+                <extdirs>${project.basedir}/src/main/webapp/WEB-INF/lib</extdirs>
+              </compilerArguments>
+            </configuration>
+        </plugin>
 
     </plugins>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->

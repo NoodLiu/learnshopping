@@ -3,7 +3,6 @@ package com.neuedu.util;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
@@ -25,7 +24,6 @@ public class TokenCache {
     }
 
     public static String get(String key) {
-
         String value = null;
         try {
             value = loadingCache.get(key);

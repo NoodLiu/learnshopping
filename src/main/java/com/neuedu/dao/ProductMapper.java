@@ -1,7 +1,11 @@
 package com.neuedu.dao;
 
+import com.neuedu.entity.Category;
 import com.neuedu.entity.Product;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
+import java.util.Set;
 
 public interface ProductMapper {
     /**
@@ -43,4 +47,14 @@ public interface ProductMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(Product record);
+
+    int updateProductKeySelective(Product product);
+
+    List<Product> findByProductIdAndProductName(@Param("productId") Integer productId,
+                                                @Param("productName") String productName);
+
+    List<Product> searchProduct(@Param("integerSet") Set<Integer> integerSet,
+                                @Param("keyword") String keyword);
+
+    int getProductstock(@Param("productId") Integer productId);
 }

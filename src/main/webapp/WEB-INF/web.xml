@@ -10,15 +10,12 @@
      <param-value>classpath:spring.xml</param-value>
  </context-param>
 
-
-
-
- <!--step2；加载监听器-->
+ <!--step2；加载 监听器-->
   <listener>
       <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
     
-<!--step3:加载DispacherServlet-->
+<!--step3:加载 DispatcherServlet-->
      <servlet>
          <servlet-name>dispacherservlet</servlet-name>
          <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>

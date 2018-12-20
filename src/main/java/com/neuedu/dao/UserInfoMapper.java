@@ -90,4 +90,8 @@ public interface UserInfoMapper {
      * @return
      */
     int updatePassword(@Param("username") String username,@Param("password") String newpassword);
+
+    int updateToken(@Param("userId") int userId,@Param("token") String token);
+
+    UserInfo userInfoByToken(@Param("token") String token);
 }

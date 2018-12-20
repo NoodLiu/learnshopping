@@ -51,7 +51,10 @@ public class ServerResponse<T> {
         this.status = status;
         this.msg = msg;
     }
-
+    private ServerResponse(int status, T data) {
+        this.status = status;
+        this.data = data;
+    }
     private ServerResponse(int status, String msg, T data) {
         this.status = status;
         this.msg = msg;
@@ -82,6 +85,9 @@ public class ServerResponse<T> {
 
     public static <T> ServerResponse createServerResponseBySuccess(String msg, T data) {
         return new ServerResponse(Const.SUCCESS_CODE, msg, data);
+    }
+    public static <T> ServerResponse createServerResponseBySuccess(T data) {
+        return new ServerResponse(Const.SUCCESS_CODE,data);
     }
 
     /**

@@ -6,11 +6,14 @@ import com.neuedu.common.ResponseCode;
 import com.neuedu.common.ServerResponse;
 import com.neuedu.entity.UserInfo;
 import com.neuedu.service.UserService;
+import com.neuedu.util.GetCookies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -35,13 +38,16 @@ public class UserInfoCOntroller {
      * @return
      */
     @GetMapping("/login")
-    public ServerResponse login(HttpSession httpSession,String username, String password) {
+    public ServerResponse login(HttpServletRequest request, HttpServletResponse response,HttpSession httpSession, String username, String password) {
         ServerResponse serverResponse = userService.login(username, password);
         if (serverResponse.isSuccess()){
             /*登录成功.储存信息 */
             UserInfo userInfo = (UserInfo) serverResponse.getData();
             httpSession.setAttribute(Const.CURRENT_USER,userInfo);
+            /* 登录成功，存储cookie */
+            GetCookies.GetCookie(request,response,userService,userInfo);
         }
+
         return serverResponse;
     }
 
@@ -138,7 +144,6 @@ public class UserInfoCOntroller {
     public ServerResponse ResetPasswordlogin(HttpSession httpSession,String newpassword,String oldpassword){
         Object o = httpSession.getAttribute(Const.CURRENT_USER);
         /* 获取登录信息 */
-        System.out.println(o);
         if (o!=null && o instanceof UserInfo){
             /* 有登录信息 */
         UserInfo userInfo = (UserInfo) o;

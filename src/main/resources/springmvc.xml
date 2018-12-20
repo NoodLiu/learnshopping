@@ -60,6 +60,19 @@
         </mvc:interceptor>
 
     </mvc:interceptors>-->
+   <!-- <mvc:interceptors>
+        &lt;!&ndash; 拦截请求 &ndash;&gt;
+        &lt;!&ndash; 前台拦截 &ndash;&gt;
+        &lt;!&ndash; 后台拦截 &ndash;&gt;
+        <mvc:interceptor>
+            <mvc:mapping path="/manage/**"/>
+            <mvc:exclude-mapping path="/portal/user/"/>
+            <mvc:exclude-mapping path="/manger/user/"/>
+            <bean class="com.neuedu.intercepter.AuthorityInterceptor"/>
+        </mvc:interceptor>
 
+
+
+    </mvc:interceptors>-->
 
 </beans>
