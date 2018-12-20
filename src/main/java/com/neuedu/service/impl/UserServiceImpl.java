@@ -12,10 +12,8 @@ import com.neuedu.util.TokenCache;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpSession;
 import java.util.UUID;
 
 
@@ -148,6 +146,7 @@ public class UserServiceImpl implements UserService {
         }
         /* step3:服务端生成一个token保存并将token返回给客户端 */
         String forgetToken = UUID.randomUUID().toString();
+        /* 保存到客户端 guava缓存 */
         TokenCache.set(username, forgetToken);
         return ServerResponse.createServerResponseBySuccess(forgetToken);
     }
@@ -213,5 +212,16 @@ public class UserServiceImpl implements UserService {
         return ServerResponse.createServerResponseBySuccess("密码修改成功");
     }
 
+    @Override
+    public int updateToken(int userId, String token) {
+        return userInfoMapper.updateToken(userId,token);
+    }
 
+    @Override
+    public UserInfo userInfoByToken(String token) {
+        if (StringUtils.isBlank(token)){
+            return null;
+        }
+        return userInfoMapper.userInfoByToken(token);
+    }
 }

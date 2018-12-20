@@ -3,6 +3,7 @@ package com.neuedu.service;
 
 import com.neuedu.common.ServerResponse;
 import com.neuedu.entity.UserInfo;
+import org.apache.ibatis.annotations.Param;
 
 import javax.servlet.http.HttpSession;
 
@@ -20,4 +21,8 @@ public interface UserService {
     ServerResponse resetPassword(String username,String newPassword,String Token);
 
     ServerResponse ResetPasswordlogin(UserInfo userInfo, String newpassword, String oldpassword);
+
+    int updateToken(int userId,String token);
+
+    UserInfo userInfoByToken(String token);
 }

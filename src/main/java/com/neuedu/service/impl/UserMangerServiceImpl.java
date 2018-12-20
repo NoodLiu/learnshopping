@@ -1,6 +1,5 @@
 package com.neuedu.service.impl;
 
-import com.neuedu.common.Const;
 import com.neuedu.common.ServerResponse;
 import com.neuedu.dao.UserInfoMapper;
 import com.neuedu.entity.UserInfo;
@@ -36,9 +35,15 @@ public class UserMangerServiceImpl implements UserMangerService {
             return ServerResponse.createServerResponseByError("密码错误");
         }
         /* 判断权限是否足够 管理员*/
-        if (userInfo.getRole() == Const.RoleEnumn.ROLE_ROOT.getCode()) {
-            return ServerResponse.createServerResponseBySuccess("登录成功");
-        }
-        return ServerResponse.createServerResponseByError("权限不足");
+
+            return ServerResponse.createServerResponseBySuccess();
     }
+
+    @Override
+    public int updateToken(int userId,String token) {
+
+            return userInfoMapper.updateToken(userId,token);
+
+    }
+
 }
